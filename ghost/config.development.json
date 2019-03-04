@@ -1,53 +1,53 @@
 {
-    "url": "http://archervanderwaal.com:2368",
-    "server": {
-      "port": 2368,
-      "host": "0.0.0.0"
-    },
-    "database": {
-        "client": "mysql",
-        "connection": {
-          "host": "mysql",
-          "port": 3306,
-          "user": "your_database_user",
-          "password": "your_database_password",
-          "database": "your_database_name"
-        }
-    },
-    "mail": {
-      "transport": "SMTP",
-      "options": {
-        "service": "Gmail",
-        "auth": {
-            "user": "youremail@gmail.com",
-            "pass": "yourpassword"
-        }
+  "url": "http://archervanderwaal.com",
+  "server": {
+    "port": 2368,
+    "host": "0.0.0.0"
+  },
+  "database": {
+      "client": "mysql",
+      "connection": {
+        "host": "mysql",
+        "port": 3306,
+        "user": "your_database_user",
+        "password": "your_database_password",
+        "database": "your_database_name"
       }
-    },
-    "logging": {
-      "transports": [
-        "file",
-        "stdout"
-      ]
-    },
-    "storage": {
-        "active": "qn-store",
-        "qn-store": {
-            "accessKey": "你的accessKey",
-            "secretKey": "你的secretKey",
-            "bucket": "对象存储的存储空间名",
-            "origin": "已经生效的CDN加速域名",
-            "fileKey": {
-                "hashAsBasename": false,
-                "safeString"    : true,
-                "prefix"        : "",
-                "suffix"        : "",
-                "extname"       : true
-            }
-        }
-    },
-    "process": "systemd",
-    "paths": {
-      "contentPath": "/var/lib/ghost/content"
+  },
+  "mail": {
+    "transport": "SMTP",
+    "options": {
+      "service": "Gmail",
+      "auth": {
+          "user": "archer.vanderwaal@gmail.com",
+          "pass": "passwd"
+      }
     }
+  },
+  "logging": {
+    "transports": [
+      "file",
+      "stdout"
+    ]
+  },
+  "storage": {
+      "active": "qn-store",
+      "qn-store": {
+          "accessKey": "你的accessKey",
+          "secretKey": "你的secretKey",
+          "bucket": "对象存储的存储空间名",
+          "origin": "已经生效的CDN加速域名",
+          "fileKey": {
+              "hashAsBasename": false,
+              "safeString"    : true,
+              "prefix"        : "",
+              "suffix"        : "",
+              "extname"       : true
+          }
+      }
+  },
+  "process": "systemd",
+  "paths": {
+    "contentPath": "/var/lib/ghost/content"
   }
+}

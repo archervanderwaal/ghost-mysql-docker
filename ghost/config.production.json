@@ -1,5 +1,5 @@
 {
-    "url": "http://archervanderwaal.com:2368",
+    "url": "http://archervanderwaal.com",
     "server": {
       "port": 2368,
       "host": "0.0.0.0"
@@ -19,8 +19,8 @@
       "options": {
         "service": "Gmail",
         "auth": {
-            "user": "youremail@gmail.com",
-            "pass": "yourpassword"
+            "user": "archer.vanderwaal@gmail.com",
+            "pass": "passwd"
         }
       }
     },
