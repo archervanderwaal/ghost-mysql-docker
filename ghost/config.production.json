@@ -1,18 +1,19 @@
 {
-    "url": "http://archervanderwaal.com",
+    "url": "http://localhost:52057/",
     "server": {
       "port": 2368,
       "host": "0.0.0.0"
     },
     "database": {
-        "client": "mysql",
-        "connection": {
-          "host": "mysql",
+      "client": "mysql",
+      "connection": {
+          "host": "db",
+          "user": "blog-user",
+          "password": "ArcherVanderWaal",
+          "database": "blog",
           "port": 3306,
-          "user": "your_database_user",
-          "password": "your_database_password",
-          "database": "your_database_name"
-        }
+          "charset": "utf8"
+      }
     },
     "mail": {
       "transport": "SMTP",
@@ -20,7 +21,7 @@
         "service": "Gmail",
         "auth": {
             "user": "archer.vanderwaal@gmail.com",
-            "pass": "passwd"
+            "pass": ""
         }
       }
     },
@@ -33,10 +34,9 @@
     "storage": {
         "active": "qn-store",
         "qn-store": {
-            "accessKey": "你的accessKey",
-            "secretKey": "你的secretKey",
-            "bucket": "对象存储的存储空间名",
-            "origin": "已经生效的CDN加速域名",
+            "accessKey": "",
+            "secretKey": "",
+            "bucket": "archer",
             "fileKey": {
                 "hashAsBasename": false,
                 "safeString"    : true,

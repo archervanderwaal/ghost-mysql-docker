@@ -1,25 +1,27 @@
-FROM ghost
+FROM ghost:2.15.0
 
 # install mysql-client and git
-RUN apt-get update -y && \
-    apt-get install -y mysql-client git && \
+RUN apt-get update -y --fix-missing && \
+    apt-get install -y git mysql-client && \
     rm -rf /var/lib/list/*
 
-ENV INSTALL_DIR /var/lib/ghost
+# ENV INSTALL_DIR /var/lib/ghost
 
-COPY ./wait-for-it.sh /usr/local/bin/wait-for-it.sh
-
-COPY ./config.development.json ./config.development.json
-COPY ./config.production.json ./config.production.json
+COPY ./wait-for-connect.sh /usr/local/bin/wait-for-connect.sh
+COPY ./config.production.json /var/lib/ghost/config.production.json
+COPY ./config.development.json /var/lib/ghost/config.development.json
 
 # install qn-store plugin
-RUN mkdir -p ${INSTALL_DIR}/content/adapters/storage && cd ${INSTALL_DIR}/content/adapters/storage && \
+RUN mkdir -p /var/lib/ghost/current/core/server/adapters/storage && \
+    cd /var/lib/ghost/current/core/server/adapters/storage && \
     git clone https://github.com/Minwe/qn-store.git && \
     cd qn-store && \
     npm install
 
+RUN chmod +x /usr/local/bin/wait-for-connect.sh
+
 # install ghost themes
-RUN cd /var/lib/ghost/content/themes && \
-    git https://github.com/kelyvin/caffeine-theme
+# RUN cd ${INSTALL_DIR}/content/themes && \
+#     git clone https://github.com/kelyvin/caffeine-theme
 
 LABEL maintainer="archervanderwaal <archer.vanderwaal@gmail.com>"
