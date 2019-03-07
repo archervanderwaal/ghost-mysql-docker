@@ -10,13 +10,13 @@ services:
     volumes:
       - db-volume:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ArcherVanderWaal
-      MYSQL_DATABASE: blog
-      MYSQL_USER: blog-user
-      MYSQL_PASSWORD: ArcherVanderWaal
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
   ghost:
     build: ./ghost
-    image: archervanderwaal/ghost:2.15
+    image: archervanderwaal/ghost-mysql:latest
     container_name: ghost
     volumes:
       - ghost-volume:/var/lib/ghost
@@ -24,10 +24,10 @@ services:
     ports:
       - 52057:2368
     environment:
-      database__connection__host: db
-      database__connection__user: blog-user
-      database__connection__password: ArcherVanderWaal
-      database__connection__database: blog
+      MYSQL_HOST: "${MYSQL_HOST}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     depends_on:
       - db
     entrypoint: ["wait-for-connect.sh", "db", "--", "docker-entrypoint.sh"]
