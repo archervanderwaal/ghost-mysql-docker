@@ -14,8 +14,6 @@ services:
   ghost:
     build: ./ghost
     image: archervanderwaal/ghost-mysql:latest
-    env_file:
-      - ./config.env
     container_name: ghost
     volumes:
       - ./data/ghost/content:/var/lib/ghost/content
