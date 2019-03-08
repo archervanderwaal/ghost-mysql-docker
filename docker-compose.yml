@@ -1,14 +1,11 @@
 version: '3.1'
-volumes:
-  db-volume:
-  ghost-volume:
 services:
   db:
     image: mysql:5.7
     container_name: db
     restart: always
     volumes:
-      - db-volume:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${MYSQL_DATABASE}"
@@ -17,17 +14,28 @@ services:
   ghost:
     build: ./ghost
     image: archervanderwaal/ghost-mysql:latest
+    env_file:
+      - ./config.env
     container_name: ghost
     volumes:
-      - ghost-volume:/var/lib/ghost
+      - ./data/ghost/content:/var/lib/ghost/content
     restart: always
     ports:
       - 52057:2368
     environment:
-      MYSQL_HOST: "${MYSQL_HOST}"
-      MYSQL_DATABASE: "${MYSQL_DATABASE}"
-      MYSQL_USER: "${MYSQL_USER}"
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      url: "${GHOST_DOMAIN}"
+      #mysql
+      database__client: mysql
+      database__connection__host: "${MYSQL_HOST}"
+      database__connection__user: "${MYSQL_USER}"
+      database__connection__password: "${MYSQL_PASSWORD}"
+      database__connection__database: "${MYSQL_DATABASE}"
+      database__connection__charset: utf-8
+      #mail
+      mail__transport: SMTP
+      mail__options__service: Gmail
+      mail__options__auth__user: "${GMAIL_USER}"
+      mail__options__auth__pass: "${GMAIL_PASS}"
     depends_on:
       - db
     entrypoint: ["wait-for-connect.sh", "db", "--", "docker-entrypoint.sh"]
