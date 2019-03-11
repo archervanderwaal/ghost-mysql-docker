@@ -17,6 +17,7 @@ services:
     container_name: ghost
     volumes:
       - ./data/ghost/content:/var/lib/ghost/content
+      - ./ghost/config.production.json:/var/lib/ghost/config.production.json
     restart: always
     ports:
       - 52057:2368

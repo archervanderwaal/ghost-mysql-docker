@@ -6,7 +6,7 @@ RUN apt-get update -y --fix-missing && \
     rm -rf /var/lib/apt/lists/*
 
 ADD wait-for-connect.sh /usr/local/bin/wait-for-connect.sh
-ADD config.production.json config.production.json
+# ADD config.production.json config.production.json
 
 # install qn-store plugin
 # RUN gosu node npm install ghost-qn-store && \
@@ -15,6 +15,6 @@ ADD config.production.json config.production.json
 
 # install ghost themes
 # RUN gosu node mkdir -p content/themes && \
-#     gosu node git clone https://github.com/kelyvin/caffeine-theme content/themes/caffeine-theme
+#    gosu node git clone https://github.com/kelyvin/caffeine-theme content/themes/caffeine-theme
 
 LABEL maintainer="archervanderwaal <archer.vanderwaal@gmail.com>"
